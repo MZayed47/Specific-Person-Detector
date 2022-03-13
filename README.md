@@ -1,3 +1,20 @@
+## Project Overview
+The defaults settings are written within the code in "detector_gui.py". Run the program after completing the pre-arrangements stated above.
+First you need to upload the image of a person, whom you want to detect. You must mention the name of the person while uploading.
+Then in the detector gui, you can select the video from youe local machine. Also specify the person name.
+Finaly, the detector button will start processing the video. It will take some time depending on the length of the video.
+At the end, the GUI will display whether the the person was detected in the video or not.
+
+### Result Image(s) (Regular TensorFlow)
+You can find the output image(s) showing the person detections saved in a new created folder within the 'detections' folder.
+
+<p align="center"><img src="outputs/person_07-Mar-2022_12-13/frame_28_person_1_MASHRUKH ZAYED.jpg" width="640"\></p>
+
+### Result Video
+Output video is saved in the detection folder.
+
+
+
 
 ## Getting Started
 ### Conda (Recommended)
@@ -41,45 +58,8 @@ Update the code to point at your custom .names file as seen below. (my custom .n
 
 <strong>Note:</strong> If you are using the pre-trained yolov4 then make sure that line 14 remains <strong>coco.names</strong>.
 
-## YOLOv4 Using Tensorflow (tf, .pb model)
-To implement YOLOv4 using TensorFlow, first we convert the .weights into the corresponding TensorFlow model files and then run the model.
-```bash
-# Convert darknet weights to tensorflow
-## yolov4
-python save_model.py --weights ./data/yolov4.weights --output ./checkpoints/yolov4-416 --input_size 416 --model yolov4 
 
-# Run yolov4 tensorflow model
-python detect.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --images ./data/images/kite.jpg
-
-# Run yolov4 on video
-python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video ./data/video/video.mp4 --output ./detections/results.avi
-
-# Run yolov4 on webcam
-python detect_video.py --weights ./checkpoints/yolov4-416 --size 416 --model yolov4 --video 0 --output ./detections/results.avi
-```
-
-<strong>Note:</strong> You can also run the detector on multiple images at once by changing the --images flag like such ``--images "./data/images/kite.jpg, ./data/images/dog.jpg"``
-
-### Result Image(s) (Regular TensorFlow)
-You can find the outputted image(s) showing the detections saved within the 'detections' folder.
-#### Pre-trained YOLOv4 Model Example
-<p align="center"><img src="detections/detection1.png" width="640"\></p>
-
-### Result Video
-Video saves wherever you point --output flag to. If you don't set the flag then your video will not be saved with detections on it.
-
-
-## Custom YOLOv4 Using TensorFlow
-The following commands will allow you to run your custom yolov4 model. (video and webcam commands work as well)
-```
-# custom yolov4
-python save_model.py --weights ./data/custom.weights --output ./checkpoints/custom-416 --input_size 416 --model yolov4 
-
-# Run custom yolov4 tensorflow model
-python detect.py --weights ./checkpoints/custom-416 --size 416 --model yolov4 --images ./data/images/car.jpg
-```
-
-## Command Line Args Reference
+## Command Line Args Reference (I defined them manually in my code fir thi project)
 
 ```bash
 save_model.py:
@@ -96,34 +76,6 @@ save_model.py:
   --model: yolov3 or yolov4
     (default: yolov4)
 
-detect.py:
-  --images: path to input images as a string with images separated by ","
-    (default: './data/images/kite.jpg')
-  --output: path to output folder
-    (default: './detections/')
-  --[no]tiny: yolov4 or yolov4-tiny
-    (default: 'False')
-  --weights: path to weights file
-    (default: './checkpoints/yolov4-416')
-  --framework: what framework to use (tf, trt, tflite)
-    (default: tf)
-  --model: yolov3 or yolov4
-    (default: yolov4)
-  --size: resize images to
-    (default: 416)
-  --iou: iou threshold
-    (default: 0.45)
-  --score: confidence threshold
-    (default: 0.25)
-  --count: count objects within images
-    (default: False)
-  --dont_show: dont show image output
-    (default: False)
-  --info: print info on detections
-    (default: False)
-  --crop: crop detections and save as new images
-    (default: False)
-    
 detect_video.py:
   --video: path to input video (use 0 for webcam)
     (default: './data/video/video.mp4')
